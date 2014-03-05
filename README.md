@@ -22,10 +22,12 @@ Instantiate a new instance of DataObjectParser to manage an object:
 
 	var d = new DataObjectParser();
 
+
 Set using dot-notation:
 
-  d.set("caravan.personel.leader","Travis");
-  d.set("caravan.personel.cook","Brent");
+	d.set("caravan.personel.leader","Travis");
+	d.set("caravan.personel.cook","Brent");
+
 
 The Object returned should be the equivalent structured object:
 
@@ -33,14 +35,17 @@ The Object returned should be the equivalent structured object:
 
 That is, where ```obj``` is equivalent to:
 
-  var obj = {
-    caravan:{
-      personel:{
-        leader:"Travis",
-        cook:"Brent"
-      }
-    }
-  };
+	var obj = {
+		caravan:{
+			personel:{
+				leader:"Travis",
+				cook:"Brent"
+			}
+		}
+	};
+
+
+
 
 
 ## License
