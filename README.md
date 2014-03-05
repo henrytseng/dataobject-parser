@@ -86,6 +86,12 @@ Where the equivalent results would be:
 
 Please take a look at the test: ```test/utils-dataobject-parser.js``` for more code examples.  
 
+## Contributors
+
+* [Andrew Baez](https://github.com/fitz66)
+* [Joanne Daudier](https://github.com/jdaudier)
+* [Henry Tseng](https://github.com/henrytseng)
+
 
 ## License
 
