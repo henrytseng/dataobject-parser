@@ -84,6 +84,8 @@ Where the equivalent results would be:
 		record: 'Beetles'
 	};
 
+Please take a look at the test: ```test/utils-dataobject-parser.js``` for more code examples.  
+
 
 ## License
 
