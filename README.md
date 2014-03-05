@@ -3,13 +3,14 @@ DataObject Parser
 
 A nodejs module designed to parse an Object hash transposing between dot-notation and a structured heirarchy of Objects/Arrays.  
 
-Translating code between 
 
 ## TL;DR
 
 String programming should be avoided.  
 
-This module was a quick work around to store our [MongoDb](http://www.mongodb.org/) documents in [Backbone.js](http://backbonejs.org/) models.  Our Backbonejs.model  dispatched events from data in a complex hierarchal structure.  
+This module generally exists as a quick work around.  We original developed it to store our [MongoDb](http://www.mongodb.org/) documents in [Backbone.js](http://backbonejs.org/) models.  Our Backbonejs.model dispatched events from data in a complex hierarchal structure.  
+
+Using this tool simplified our models so that we could just use one model with the subdocuments laid out in a hash with dot-notation.  In our application we've overwritten the Backbonejs.sync to parse the data before sending/receiving.  
 
 
 ## Installation
@@ -28,6 +29,10 @@ Set using dot-notation:
 	d.set("caravan.personel.leader","Travis");
 	d.set("caravan.personel.cook","Brent");
 
+Also set using array notation:
+
+	d.set("location.rooms[0]", "kitchen");
+	d.set("location.rooms[1]", "bathroom");
 
 The Object returned should be the equivalent structured object:
 
@@ -38,14 +43,46 @@ That is, where ```obj``` is equivalent to:
 	var obj = {
 		caravan:{
 			personel:{
-				leader:"Travis",
-				cook:"Brent"
+				leader: "Travis",
+				cook: "Brent"
 			}
+		},
+		location: {
+			rooms: ["kitchen", "bathroom"]
 		}
 	};
 
+```transpose()``` and ```untranspose()``` methods can transform the data between the two formats (e.g. - An Object hash with properties using dot-notation and a heirchy structured Object or Object(s)/Arrays(s))
 
+	flat = DataObjectParser.untranspose(structured)
 
+	structured = DataObjectParser.transpose(flat)
+
+Where the equivalent results would be:
+
+	var structured = {
+		location: {
+			city:{
+				name: "House on cliff",
+				geo: '45, 23'
+			}
+		},
+		time: {
+			hour: '0',
+			minute: '0'
+		},
+		duration: '4 hours',
+		record: 'Beetles'
+	};
+
+	var flat = {
+		'location.city.name': 'House on cliff',
+		'location.city.geo': '45, 23',
+		'time.hour': '0',
+		'time.minute': '0',
+		duration: '4 hours',
+		record: 'Beetles'
+	};
 
 
 ## License
