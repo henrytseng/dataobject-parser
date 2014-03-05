@@ -1,6 +1,8 @@
 DataObject Parser
 =================
 
+[![Build Status](https://travis-ci.org/Gigzolo/dataobject-parser.png?branch=master)](https://travis-ci.org/Gigzolo/dataobject-parser)
+
 A nodejs module designed to parse an Object hash transposing between dot-notation and a structured heirarchy of Objects/Arrays.  
 
 
