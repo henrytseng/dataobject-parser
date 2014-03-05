@@ -1,5 +1,5 @@
 
-MOCHA=./node_modules/.bin/mocha
+MOCHA= ./node_modules/.bin/mocha
 
 test: test-unit
 
