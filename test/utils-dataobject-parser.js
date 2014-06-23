@@ -266,6 +266,21 @@ describe('DataObjectParser', function(){
         DataObjectParser.transpose(flat).should.eql(structured);       
         $done();
       });
+
+      it("should create a structured data with one key from 'location.address-two'",function($done){
+          var flat = {
+              'location.address-two': 'Grandma Road'
+          }
+          var structured={
+              _data:{
+                  location:{
+                      "address-two": "Grandma Road"
+                  }
+              }
+          }
+          DataObjectParser.transpose(flat).should.eql(structured);
+          $done();
+      });
       
       it("should take a date object in flat and it should stay a date object in structured",function($done){
         var date = new Date(2014,0,1);
@@ -365,6 +380,23 @@ describe('DataObjectParser', function(){
 
         DataObjectParser.untranspose(structured).should.eql(flat);
         $done();
+      });
+
+      it('should take object with hyphen and return correct flat DataObjectParser',function($done){
+          var structured = {
+              'location-two': 'House on cliff',
+              time: 'noon',
+              duration: '4 hours',
+              record: 'Beetles'
+          }
+          var flat = {
+              'location-two': 'House on cliff',
+              'time': 'noon',
+              'duration': '4 hours',
+              'record': 'Beetles'
+          }
+          DataObjectParser.untranspose(structured).should.eql(flat);
+          $done();
       });
 
       it("should take object-3-layer structured data and return flat DataObjectParser",function($done){
