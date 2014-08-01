@@ -1,6 +1,6 @@
 {
   "name": "dataobject-parser",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A nodejs module designed to parse an Object hash transposing between dot-notation and a structured heirarchy of Objects/Arrays.  ",
   "main": "lib/utils/dataobject-parser.js",
   "scripts": {
@@ -37,7 +37,7 @@
     }
   ],
   "dependencies": {
-    "underscore": "1.4.2"
+    "lodash": "~2.4.1"
   },
   "devDependencies": {
     "mocha": "1.8.1",

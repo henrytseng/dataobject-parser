@@ -1,5 +1,7 @@
+'use strict';
+
 var should = require('should');
-var _ = require('underscore');
+var _ = require('lodash');
 
 var DataObjectParser = require('../lib/utils/dataobject-parser');
 
@@ -17,11 +19,11 @@ describe('DataObjectParser', function(){
           caravan: {
             personel:{
               leader:'Travis'
-            } 
+            }
           }
         };
         _.isEqual(d._data,o).should.equal(true);
-        
+
         //only one key in object
         d = new DataObjectParser();
         d.set('person','Andrew');
@@ -90,7 +92,7 @@ describe('DataObjectParser', function(){
             car:[undefined,{cook:'Brent'},{chef:  'Bill'}]
           }
         };
-        _.isEqual(d._data,o).should.equal(true); 
+        _.isEqual(d._data,o).should.equal(true);
         $done();
       });
 
@@ -99,7 +101,7 @@ describe('DataObjectParser', function(){
         d.set('caravan[leader]','Travis');
         d.set('caravan.cook[0]','Andrew');
         d.set('caravan[cook][1]','Brann');
-        
+
         var o ={
           caravan:{
             leader: "Travis",
@@ -116,7 +118,7 @@ describe('DataObjectParser', function(){
         var o={
           "location.home": "New York"
         };
-        
+
         _.isEqual(d._data,o).should.equal(true);
         $done();
       });
@@ -145,7 +147,7 @@ describe('DataObjectParser', function(){
         d._data.secretObject.propertyIsEnumerable("secretKey").should.eql(false);
         d._data.secretObject.propertyIsEnumerable("open").should.eql(false);
         d._data.secretObject.propertyIsEnumerable("close").should.eql(false);
-        
+
         $done();
       });
 
@@ -184,7 +186,7 @@ describe('DataObjectParser', function(){
 
         d.set('destination["city"].region', "Hawaii");
         d.get('destination["city"].region').should.equal('Hawaii');
-        
+
         d.set('destination[city][region]', "California");
         d.get('destination[city][region]').should.equal('California');
 
@@ -222,13 +224,13 @@ describe('DataObjectParser', function(){
         dataValue.publicKey = 321;
 
         d.set('secretObject', dataValue);
-        
+
         d.get("secretObject.publicKey").should.equal(321);
 
         _.isUndefined(d.get("secretObject.open")).should.equal(true);
 
         $done();
-      });      
+      });
     });
 
 /*-------------Transpose-------------*/
@@ -263,7 +265,7 @@ describe('DataObjectParser', function(){
           }
         };
 
-        DataObjectParser.transpose(flat).should.eql(structured);       
+        DataObjectParser.transpose(flat).should.eql(structured);
         $done();
       });
 
@@ -281,7 +283,7 @@ describe('DataObjectParser', function(){
           DataObjectParser.transpose(flat).should.eql(structured);
           $done();
       });
-      
+
       it("should take a date object in flat and it should stay a date object in structured",function($done){
         var date = new Date(2014,0,1);
 
@@ -300,7 +302,7 @@ describe('DataObjectParser', function(){
 
         _.isString(newDate).should.eql(false);
         _.isDate(newDate).should.eql(true);
-        
+
         $done();
       });
     });
@@ -355,7 +357,7 @@ describe('DataObjectParser', function(){
       });
 
       it('should take object-2-layer structured data and return flat DataObjectParser',function($done){
-        
+
         var structured = {
           location: {
             name: 'House on cliff',
@@ -460,7 +462,7 @@ describe('DataObjectParser', function(){
             rooms:[{
               name: "kitchen",
               purpose: "cooking"
-              }, 
+              },
               "bathroom"
             ]
           }
@@ -556,7 +558,7 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-  
+
       it("a string of form 'null' should stay 'null'",function($done){
         var structured={
           info:{
@@ -569,7 +571,7 @@ describe('DataObjectParser', function(){
 
         DataObjectParser.untranspose(structured).should.eql(flat);
         $done();
-      });   
+      });
 
       it("should make a boolean should stay a boolean",function($done){
         var structured={
@@ -607,18 +609,18 @@ describe('DataObjectParser', function(){
           "container.info": "This is data",
           "container.data.publicKey": 321
         };
-        
+
         var d = DataObjectParser.untranspose(structured);
         d.should.eql(flat);
 
         // console.log(Object.getOwnPropertyNames(d));
         $done();
-      }); 
-      
+      });
+
 
       it("test what untranspose returns if a Date object in the structured object",function($done){
         var date = new Date(2014,0,1);
-        
+
         var structured={
           info: date
         };
