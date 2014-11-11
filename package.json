@@ -15,7 +15,8 @@
     "transpose",
     "heirarchy",
     "flat",
-    "dot-notation"
+    "dot-notation",
+    "dot notation"
   ],
   "author": "Andrew Baez <fitz066@gmail.com>",
   "contributors": [
