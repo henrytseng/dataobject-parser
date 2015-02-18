@@ -11,7 +11,7 @@ describe('DataObjectParser', function(){
 
 /*-------------Set-------------*/
     describe('#set',function(){
-      it('should accomplish the same as setting internal values with object literals', function($done) {
+      it('Should accomplish the same as setting internal values with object literals', function($done) {
         var d = new DataObjectParser();
         d.set('caravan.personel.leader', 'Travis');
 
@@ -64,7 +64,7 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-      it('should overwrite already existing indexes in an array if that index is set later',function($done){
+      it('Should overwrite already existing indexes in an array if that index is set later',function($done){
         var d = new DataObjectParser();
         d.set('caravan.leader','Travis');
         d.set('caravan.cook[0]','Brent');
@@ -80,7 +80,7 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-      it('should create an array inside car that holds other object literals',function($done){
+      it('Should create an array inside car that holds other object literals',function($done){
         var d = new DataObjectParser();
         d.set('caravan.leader','Andrew');
         d.set('caravan.car[1].cook','Brent');
@@ -96,7 +96,7 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-      it('should tell the difference between seting an array and setting an object',function($done){
+      it('Should tell the difference between seting an array and setting an object',function($done){
         var d = new DataObjectParser();
         d.set('caravan[leader]','Travis');
         d.set('caravan.cook[0]','Andrew');
@@ -112,7 +112,7 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-      it("should create on key from 'location.home'",function($done){
+      it("Should create on key from 'location.home'",function($done){
         var d = new DataObjectParser();
         d.set('["location.home"]',"New York");
         var o={
@@ -123,7 +123,7 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-      it('should take a date object and not change it to a string',function($done){
+      it('Should take a date object and not change it to a string',function($done){
         var d = new DataObjectParser();
         var date = new Date(2014,0,1);
 
@@ -134,7 +134,7 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-      it('should set objects as values with non-enumerable data',function($done){
+      it('Should set objects as values with non-enumerable data',function($done){
         var d = new DataObjectParser();
         var dataValue = {};
         Object.defineProperty(dataValue,"secretKey",{value: 123, enumerable: false});
@@ -151,7 +151,7 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-      it('should throw an error if you try to make the first key an array name',function($done){
+      it('Should throw an error if you try to make the first key an array name',function($done){
         var d = new DataObjectParser();
         d.set('caravan[0]','test').should.throw();
         $done();
@@ -160,7 +160,7 @@ describe('DataObjectParser', function(){
 
 /*-------------Get-------------*/
     describe('#get',function(){
-      it('should get the value associated with a given key in an object',function($done){
+      it('Should get the value associated with a given key in an object',function($done){
         var d = new DataObjectParser();
 
         d.set('caravan.leader','Travis');
@@ -193,7 +193,7 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-      it('should add new elements to a created array',function($done){
+      it('Should add new elements to a created array',function($done){
         var d = new DataObjectParser();
 
         d.set('destination.city[0]','Atlanta');
@@ -204,7 +204,7 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-      it('should get the overwriten value rather than the original value',function($done){
+      it('Should get the overwriten value rather than the original value',function($done){
         var d = new DataObjectParser();
 
         d.set('destination.city[0]','Atlanta');
@@ -215,7 +215,7 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-      it('should set objects as values with non-enumerable data',function($done){
+      it('Should set objects as values with non-enumerable data',function($done){
         var d = new DataObjectParser();
         var dataValue = {};
         Object.defineProperty(dataValue,"secretKey",{value: 123, enumerable: false});
@@ -235,7 +235,7 @@ describe('DataObjectParser', function(){
 
 /*-------------Transpose-------------*/
     describe('#transpose',function(){
-      it('should take flat data and return structured DataObjectParser',function($done){
+      it('Should take flat data and return structured DataObjectParser',function($done){
         var flat = {
           'location.name': "Grandma house",
           'location.city': "New Haven"
@@ -252,7 +252,7 @@ describe('DataObjectParser', function(){
         DataObjectParser.transpose(flat).should.eql(structured);
         $done();
       });
-      it("should create a structured data with one key from 'location.name'",function($done){
+      it("Should create a structured data with one key from 'location.name'",function($done){
         var flat = {
           'city["location.name"]': "Grandma house",
         };
@@ -269,22 +269,22 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-      it("should create a structured data with one key from 'location.address-two'",function($done){
+      it("Should create a structured data with one key from 'location.address-two'",function($done){
           var flat = {
               'location.address-two': 'Grandma Road'
-          }
+          };
           var structured={
               _data:{
                   location:{
                       "address-two": "Grandma Road"
                   }
               }
-          }
+          };
           DataObjectParser.transpose(flat).should.eql(structured);
           $done();
       });
 
-      it("should take a date object in flat and it should stay a date object in structured",function($done){
+      it("Should take a date object in flat and it should stay a date object in structured",function($done){
         var date = new Date(2014,0,1);
 
         var flat = {
@@ -305,11 +305,26 @@ describe('DataObjectParser', function(){
 
         $done();
       });
+
+      it("Should create a structured data with one key from 'metadata.foo|bar'",function($done){
+          var flat = {
+              'metadata.foo|bar': 'some-text'
+          };
+          var structured={
+              _data:{
+                  metadata: {
+                    'foo|bar': 'some-text'
+                  }
+              }
+          };
+          DataObjectParser.transpose(flat).should.eql(structured);
+          $done();
+      });
     });
 
 /*-------------Untranspose-------------*/
     describe('#untranspose',function(){
-      it("should handle a DataObjectParser or an object",function($done){
+      it("Should handle a DataObjectParser or an object",function($done){
         var structured = {
           location: 'House on cliff',
           time: 'noon',
@@ -337,7 +352,7 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-      it('should take object-1-layer structured data and return flat DataObjectParser',function($done){
+      it('Should take object-1-layer structured data and return flat DataObjectParser',function($done){
         var structured = {
           location: 'House on cliff',
           time: 'noon',
@@ -356,7 +371,7 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-      it('should take object-2-layer structured data and return flat DataObjectParser',function($done){
+      it('Should take object-2-layer structured data and return flat DataObjectParser',function($done){
 
         var structured = {
           location: {
@@ -384,24 +399,24 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-      it('should take object with hyphen and return correct flat DataObjectParser',function($done){
+      it('Should take object with hyphen and return correct flat DataObjectParser',function($done){
           var structured = {
               'location-two': 'House on cliff',
               time: 'noon',
               duration: '4 hours',
               record: 'Beetles'
-          }
+          };
           var flat = {
               'location-two': 'House on cliff',
               'time': 'noon',
               'duration': '4 hours',
               'record': 'Beetles'
-          }
+          };
           DataObjectParser.untranspose(structured).should.eql(flat);
           $done();
       });
 
-      it("should take object-3-layer structured data and return flat DataObjectParser",function($done){
+      it("Should take object-3-layer structured data and return flat DataObjectParser",function($done){
         var structured = {
           location: {
             city:{
@@ -430,7 +445,7 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-      it("should take a structured object containing array and return a flat DataObjectParser",function($done){
+      it("Should take a structured object containing array and return a flat DataObjectParser",function($done){
         var structured = {
           location: {
             city:{
@@ -452,7 +467,7 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-      it('should take an object that has an array with an object nested in it and return aflat DataObjectParser',function($done){
+      it('Should take an object that has an array with an object nested in it and return aflat DataObjectParser',function($done){
         var structured = {
           location: {
             city:{
@@ -480,7 +495,7 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-      it("shouldn't break if value is null or undefined",function($done){
+      it("Shouldn't break if value is null or undefined",function($done){
         var structured={
           info:{
             name: null,
@@ -495,7 +510,7 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-      it('should handle multiple bracket notated keys that point to arrays',function($done){
+      it('Should handle multiple bracket notated keys that point to arrays',function($done){
         var structured={
           info:{
             "a.b":[
@@ -514,7 +529,7 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-      it('should handle complecated object combinations',function($done){
+      it('Should handle complicated object combinations',function($done){
         var structured={
           events:{
             location:{
@@ -558,8 +573,7 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-
-      it("a string of form 'null' should stay 'null'",function($done){
+      it("A string of form 'null' should stay 'null'",function($done){
         var structured={
           info:{
             name: "null"
@@ -573,7 +587,7 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-      it("should make a boolean should stay a boolean",function($done){
+      it("Should make a boolean should stay a boolean",function($done){
         var structured={
           info:{
             "true": true,
@@ -590,7 +604,7 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-      it("should skip over non-enumerable data",function($done){
+      it("Should skip over non-enumerable data",function($done){
 
         var dataValue = {};
         Object.defineProperty(dataValue,"secretKey",{value: 123, enumerable: false});
@@ -613,12 +627,10 @@ describe('DataObjectParser', function(){
         var d = DataObjectParser.untranspose(structured);
         d.should.eql(flat);
 
-        // console.log(Object.getOwnPropertyNames(d));
         $done();
       });
 
-
-      it("test what untranspose returns if a Date object in the structured object",function($done){
+      it("Test what untranspose returns if a Date object in the structured object",function($done){
         var date = new Date(2014,0,1);
 
         var structured={
@@ -634,6 +646,21 @@ describe('DataObjectParser', function(){
         _.isString(newDate).should.eql(false);
         _.isDate(newDate).should.eql(true);
 
+        $done();
+      });
+
+      it('Should handle pipes correctly as part of a variable name',function($done){
+        var structured={
+          metadata:{
+            'foo|bar': 'some-text'
+          }
+        };
+
+        var flat={
+          'metadata.foo|bar': "some-text",
+        };
+
+        DataObjectParser.untranspose(structured).should.eql(flat);
         $done();
       });
     });
