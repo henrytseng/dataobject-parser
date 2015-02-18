@@ -320,6 +320,21 @@ describe('DataObjectParser', function(){
           DataObjectParser.transpose(flat).should.eql(structured);
           $done();
       });
+
+      it("Should create a structured data with one key from 'metadata.foo_bar'",function($done){
+          var flat = {
+              'metadata.foo_bar': 'some-text'
+          };
+          var structured={
+              _data:{
+                  metadata: {
+                    'foo_bar': 'some-text'
+                  }
+              }
+          };
+          DataObjectParser.transpose(flat).should.eql(structured);
+          $done();
+      });
     });
 
 /*-------------Untranspose-------------*/
@@ -658,6 +673,21 @@ describe('DataObjectParser', function(){
 
         var flat={
           'metadata.foo|bar': "some-text",
+        };
+
+        DataObjectParser.untranspose(structured).should.eql(flat);
+        $done();
+      });
+
+      it('Should handle underscores correctly as part of a variable name',function($done){
+        var structured={
+          metadata:{
+            'foo_bar': 'some-text'
+          }
+        };
+
+        var flat={
+          'metadata.foo_bar': "some-text",
         };
 
         DataObjectParser.untranspose(structured).should.eql(flat);
