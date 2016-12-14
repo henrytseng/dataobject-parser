@@ -9,7 +9,6 @@ describe('DataObjectParser', function(){
 
   describe('test:unit',function(){
 
-/*-------------Set-------------*/
     describe('#set',function(){
       it('Should accomplish the same as setting internal values with object literals', function($done) {
         var d = new DataObjectParser();
@@ -158,7 +157,6 @@ describe('DataObjectParser', function(){
       });
     });
 
-/*-------------Get-------------*/
     describe('#get',function(){
       it('Should get the value associated with a given key in an object',function($done){
         var d = new DataObjectParser();
@@ -233,7 +231,6 @@ describe('DataObjectParser', function(){
       });
     });
 
-/*-------------Transpose-------------*/
     describe('#transpose',function(){
       it('Should take flat data and return structured DataObjectParser',function($done){
         var flat = {
@@ -254,7 +251,7 @@ describe('DataObjectParser', function(){
       });
       it("Should create a structured data with one key from 'location.name'",function($done){
         var flat = {
-          'city["location.name"]': "Grandma house",
+          'city["location.name"]': "Grandma house"
         };
 
         var structured={
@@ -288,7 +285,7 @@ describe('DataObjectParser', function(){
         var date = new Date(2014,0,1);
 
         var flat = {
-          'info': date,
+          'info': date
         };
 
         var structured={
@@ -337,7 +334,6 @@ describe('DataObjectParser', function(){
       });
     });
 
-/*-------------Untranspose-------------*/
     describe('#untranspose',function(){
       it("Should handle a DataObjectParser or an object",function($done){
         var structured = {
@@ -475,7 +471,7 @@ describe('DataObjectParser', function(){
           'location.city.name': 'House on cliff',
           'location.city.geo': '45, 23',
           "location.rooms[0]": "kitchen",
-          "location.rooms[1]": "bathroom",
+          "location.rooms[1]": "bathroom"
         };
 
         DataObjectParser.untranspose(structured).should.eql(flat);
@@ -503,7 +499,7 @@ describe('DataObjectParser', function(){
           'location.city.geo': '45, 23',
           "location.rooms[0].name": "kitchen",
           "location.rooms[0].purpose": "cooking",
-          "location.rooms[1]": "bathroom",
+          "location.rooms[1]": "bathroom"
         };
 
         DataObjectParser.untranspose(structured).should.eql(flat);
@@ -537,7 +533,7 @@ describe('DataObjectParser', function(){
 
         var flat={
           'info["a.b"][0]["c.d"][0]["g.h"]':"Hello",
-          'info["a.b"][1]["e.f"][0]["i.j"]':"There",
+          'info["a.b"][1]["e.f"][0]["i.j"]':"There"
         };
 
         DataObjectParser.untranspose(structured).should.eql(flat);
@@ -672,7 +668,7 @@ describe('DataObjectParser', function(){
         };
 
         var flat={
-          'metadata.foo|bar': "some-text",
+          'metadata.foo|bar': "some-text"
         };
 
         DataObjectParser.untranspose(structured).should.eql(flat);
