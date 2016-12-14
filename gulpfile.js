@@ -15,6 +15,6 @@ var tasks = fs.readdirSync('tasks/')
   });
 
 // Default task
-gulp.task('default', ['clean'], function(callback) {
-  runSequence('styles', 'lint:frontend', 'bower', 'scripts', 'images', 'favicons', 'fonts', 'meta', 'assets', 'lint:backend', callback);
+gulp.task('default', function(callback) {
+  runSequence('test', callback);
 });
