@@ -4,7 +4,7 @@
   "description": "A nodejs module designed to parse an Object hash transposing between dot-notation and a structured heirarchy of Objects/Arrays.  ",
   "main": "lib/utils/dataobject-parser.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --bail"
+    "test": "./node_modules/.bin/mocha --bail --recursive test"
   },
   "repository": {
     "type": "git",
