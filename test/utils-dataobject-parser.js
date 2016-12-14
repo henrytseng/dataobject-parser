@@ -12,6 +12,18 @@ describe('DataObjectParser', function(){
     describe('#set',function(){
       it('Should accomplish the same as setting internal values with object literals', function($done) {
         var d = new DataObjectParser();
+        d.set('$a.b.c', 'Cabin');
+        d.set('a_b.b.c', 'Syrup');
+
+        var result = d.data();
+
+        result.should.be.an.instanceof(Object).and.have.property("$a");
+        result.should.be.an.instanceof(Object).and.have.property("a_b");
+        $done();
+      });
+
+      it('Should accomplish the same as setting internal values with object literals', function($done) {
+        var d = new DataObjectParser();
         d.set('caravan.personel.leader', 'Travis');
 
         var o = {
@@ -158,6 +170,18 @@ describe('DataObjectParser', function(){
     });
 
     describe('#get',function(){
+      it('Should accomplish the same as setting internal values with object literals', function($done) {
+        var d = new DataObjectParser();
+        d.set('$a.b.c', 'Cabin');
+        d.set('a_b.b.c', 'Syrup');
+
+        var result = d.data();
+
+        d.get("$a.b.c").should.equal("Cabin");
+        d.get("a_b.b.c").should.equal("Syrup");
+        $done();
+      });
+
       it('Should get the value associated with a given key in an object',function($done){
         var d = new DataObjectParser();
 
@@ -683,7 +707,24 @@ describe('DataObjectParser', function(){
         };
 
         var flat={
-          'metadata.foo_bar': "some-text",
+          'metadata.foo_bar': "some-text"
+        };
+
+        DataObjectParser.untranspose(structured).should.eql(flat);
+        $done();
+      });
+
+      it('Should handle "$" correctly as part of a variable name',function($done){
+        var structured={
+          metadata:{
+            'foo_$bar': 'some-text',
+            'foo_bar': 'some-other-text'
+          }
+        };
+
+        var flat={
+          'metadata.foo_$bar': "some-text",
+          'metadata.foo_bar': "some-other-text"
         };
 
         DataObjectParser.untranspose(structured).should.eql(flat);
