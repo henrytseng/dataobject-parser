@@ -38,7 +38,11 @@
     }
   ],
   "dependencies": {
-    "lodash": "~2.4.1"
+    "gulp": "^3.9.1",
+    "gulp-mocha": "^3.0.1",
+    "gulp-watch": "^4.3.11",
+    "lodash": "~2.4.1",
+    "run-sequence": "^1.2.2"
   },
   "devDependencies": {
     "mocha": "1.8.1",

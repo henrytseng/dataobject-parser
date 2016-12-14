@@ -3,7 +3,7 @@
 var should = require('should');
 var _ = require('lodash');
 
-var DataObjectParser = require('../lib/utils/dataobject-parser');
+var DataObjectParser = require(process.cwd()+'/lib/utils/dataobject-parser');
 
 describe('DataObjectParser', function(){
 
