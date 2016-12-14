@@ -1,6 +1,6 @@
 {
   "name": "dataobject-parser",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A nodejs module designed to parse an Object hash transposing between dot-notation and a structured heirarchy of Objects/Arrays.  ",
   "main": "lib/utils/dataobject-parser.js",
   "scripts": {
@@ -38,15 +38,15 @@
     }
   ],
   "dependencies": {
-    "gulp": "^3.9.1",
-    "gulp-mocha": "^3.0.1",
-    "gulp-watch": "^4.3.11",
-    "lodash": "~2.4.1",
-    "run-sequence": "^1.2.2"
+    "lodash": "~2.4.1"
   },
   "devDependencies": {
     "mocha": "1.8.1",
-    "should": "1.2.1"
+    "should": "1.2.1",
+    "gulp": "^3.9.1",
+    "gulp-mocha": "^3.0.1",
+    "gulp-watch": "^4.3.11",
+    "run-sequence": "^1.2.2"
   },
   "license": "MIT",
   "bugs": {
