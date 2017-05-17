@@ -60,7 +60,7 @@ That is, where ```obj``` is equivalent to:
 
 	flat = DataObjectParser.untranspose(structured)
 
-	structured = DataObjectParser.transpose(flat)
+	structured = DataObjectParser.transpose(flat, [options] /*default: {transposeNumAsArray : false}*/) 
 
 Where the equivalent results would be:
 
