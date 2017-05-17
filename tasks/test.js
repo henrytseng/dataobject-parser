@@ -17,6 +17,6 @@ gulp.task('test', function(done) {
       process.exit(1);
     })
     .once('end', () => {
-      done()
+      done();
     });
 });
