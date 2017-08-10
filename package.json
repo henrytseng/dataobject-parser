@@ -40,12 +40,13 @@
   "dependencies": {
   },
   "devDependencies": {
-    "mocha": "1.8.1",
-    "should": "1.2.1",
     "gulp": "^3.9.1",
     "gulp-mocha": "^3.0.1",
     "gulp-watch": "^4.3.11",
-    "run-sequence": "^1.2.2"
+    "lodash": "^4.17.4",
+    "mocha": "1.8.1",
+    "run-sequence": "^1.2.2",
+    "should": "1.2.1"
   },
   "license": "MIT",
   "bugs": {
