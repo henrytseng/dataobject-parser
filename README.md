@@ -42,7 +42,7 @@ The Object returned should be the equivalent structured object:
 
 	var obj = d.data();
 
-That is, where ```obj``` is equivalent to:
+That is, where `obj` is equivalent to:
 
 	var obj = {
 		caravan:{
@@ -56,7 +56,7 @@ That is, where ```obj``` is equivalent to:
 		}
 	};
 
-```transpose()``` and ```untranspose()``` methods can transform the data between the two formats (e.g. - An Object hash with properties using dot-notation and a heirchy structured Object or Object(s)/Arrays(s))
+`transpose()` and `untranspose()` methods can transform the data between the two formats (e.g. - An Object hash with properties using dot-notation and a heirchy structured Object or Object(s)/Arrays(s))
 
 	flat = DataObjectParser.untranspose(structured)
 
@@ -88,7 +88,7 @@ Where the equivalent results would be:
 		record: 'Beetles'
 	};
 
-Please take a look at the test: ```test/utils-dataobject-parser.js``` for more code examples.  
+Please take a look at the test: `test/utils-dataobject-parser.js` for more code examples.  
 
 ## Contributors
 
