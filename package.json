@@ -37,13 +37,12 @@
       "email": "davidtpate@gmail.com"
     }
   ],
-  "dependencies": {},
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "gulp-mocha": "^3.0.1",
-    "gulp-watch": "^4.3.11",
+    "gulp": "^4.0.2",
+    "gulp-mocha": "^8.0.0",
+    "gulp-watch": "^4.0.1",
     "lodash": "^4.17.4",
-    "mocha": "1.8.1",
+    "mocha": "^9.2.1",
     "run-sequence": "^1.2.2",
     "should": "1.2.1"
   },
