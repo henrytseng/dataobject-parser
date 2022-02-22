@@ -1,6 +1,7 @@
 'use strict';
 
 var should = require('should');
+var assert = require('assert');
 var _ = require('lodash');
 
 var DataObjectParser = require(process.cwd()+'/lib/utils/dataobject-parser');
@@ -165,6 +166,19 @@ describe('DataObjectParser', function(){
       it('Should throw an error if you try to make the first key an array name',function($done){
         var d = new DataObjectParser();
         d.set('caravan[0]','test').should.throw();
+        $done();
+      });
+    });
+
+    describe('#get',function(){
+      it('Should differentiate between null and undefined values', function($done) {
+        var d = new DataObjectParser();
+        d.set('abc', null);
+
+        var result = d.data();
+
+        assert.ok(d.get("abc") == null)
+        assert.ok(typeof(d.get("def")) == 'undefined')
         $done();
       });
     });
