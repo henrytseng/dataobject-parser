@@ -713,6 +713,21 @@ describe('DataObjectParser', function(){
         $done();
       });
 
+      it('Should handle pipes correctly as part of a variable name',function($done){
+        var structured={
+          metadata:{
+            'a.b:c': 'some-text'
+          }
+        };
+
+        var flat={
+          'metadata.a.b:c': "some-text"
+        };
+
+        DataObjectParser.untranspose(structured).should.eql(flat);
+        $done();
+      });
+
       it('Should handle underscores correctly as part of a variable name',function($done){
         var structured={
           metadata:{
