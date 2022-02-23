@@ -516,6 +516,34 @@ describe('DataObjectParser', function(){
         $done();
       });
 
+      it("Should take a structured object containing array multiple items and return a flat DataObjectParser",function($done){
+        var structured = {
+          tracking: true,
+          blocked: true,
+          nsfw: false,
+          categories: {
+            subscribed: [ 'xag2vJYrDJdsyZfah', 'abpxCb6pN3aR4piMw' ],
+            blocked: []
+          },
+          sources: {
+            subscribed: [ '4QSh8AqECuPauHFor' ],
+            blocked: []
+          }
+        };
+
+        var flat = {
+          'tracking': true,
+          'blocked': true,
+          'nsfw': false,
+          'categories.subscribed[0]': 'xag2vJYrDJdsyZfah',
+          'categories.subscribed[1]': 'abpxCb6pN3aR4piMw',
+          'sources.subscribed[0]': '4QSh8AqECuPauHFor'
+        };
+
+        DataObjectParser.untranspose(structured).should.eql(flat);
+        $done();
+      });
+
       it('Should take an object that has an array with an object nested in it and return aflat DataObjectParser',function($done){
         var structured = {
           location: {
