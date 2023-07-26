@@ -92,6 +92,27 @@ describe('DataObjectParser', function(){
         $done();
       });
 
+      it('Should handle object keys that are numbers',function($done){
+        var d = new DataObjectParser();
+        d.set('myObj.0', 'a');
+        d.set('myObj.["1"]', 'b');
+        d.set('myObj.2', 'c');
+        d.set('myArray[0]', 'x');
+        d.set('myArray[1]', 'y');
+        d.set('myArray[2]', 'z');
+
+        var o ={
+          "myObj":{
+            "0": "a",
+            "1": "b",
+            "2": "c",
+          },
+          "myArray": ["x","y","z"],
+        };
+        _.isEqual(d._data,o).should.equal(true);
+        $done();
+      });
+
       it('Should create an array inside car that holds other object literals',function($done){
         var d = new DataObjectParser();
         d.set('caravan.leader','Andrew');
