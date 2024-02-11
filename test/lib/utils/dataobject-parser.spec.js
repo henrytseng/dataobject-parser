@@ -342,18 +342,33 @@ describe('DataObjectParser', function(){
       });
 
       it("Should create a structured data with one key from 'metadata.foo|bar'",function($done){
-          var flat = {
-              'metadata.foo|bar': 'some-text'
-          };
-          var structured={
-              _data:{
-                  metadata: {
-                    'foo|bar': 'some-text'
-                  }
-              }
-          };
-          DataObjectParser.transpose(flat).should.eql(structured);
-          $done();
+        var flat = {
+            'metadata.foo|bar': 'some-text'
+        };
+        var structured={
+            _data:{
+                metadata: {
+                  'foo|bar': 'some-text'
+                }
+            }
+        };
+        DataObjectParser.transpose(flat).should.eql(structured);
+        $done();
+      });
+
+      it("Should create a structured data with one key from 'metadata.foo:bar'",function($done){
+        var flat = {
+            'metadata.foo:bar': 'some-text'
+        };
+        var structured={
+            _data:{
+                metadata: {
+                  'foo:bar': 'some-text'
+                }
+            }
+        };
+        DataObjectParser.transpose(flat).should.eql(structured);
+        $done();
       });
 
       it("Should create a structured data with one key from 'metadata.foo_bar'",function($done){
@@ -741,15 +756,15 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-      xit('Should handle colons in naming correctly as part of a variable name',function($done){
+      it('Should handle colons in naming correctly as part of a variable name',function($done){
         var structured={
           metadata:{
-            'a.b:c': 'some-text'
+            'b:c': 'some-text'
           }
         };
 
         var flat={
-          'metadata.a.b:c': "some-text"
+          'metadata.b:c': "some-text"
         };
 
         DataObjectParser.untranspose(structured).should.eql(flat);
