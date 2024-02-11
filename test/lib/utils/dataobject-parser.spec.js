@@ -356,7 +356,6 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-
       it("Should create a structured data with one key from 'metadata.foo:bar'",function($done){
         var flat = {
             'metadata.foo:bar': 'some-text'
