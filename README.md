@@ -1,9 +1,7 @@
 DataObject Parser
 =================
 
-[![Join the chat at https://gitter.im/Gigzolo/dataobject-parser](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Gigzolo/dataobject-parser?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-[![Build Status](https://travis-ci.org/Gigzolo/dataobject-parser.png?branch=master)](https://travis-ci.org/Gigzolo/dataobject-parser)
+[![Node.js CI](https://github.com/henrytseng/dataobject-parser/actions/workflows/node.js.yml/badge.svg)](https://github.com/henrytseng/dataobject-parser/actions/workflows/node.js.yml)
 
 A nodejs module designed to parse an Object hash transposing between dot-notation and a structured heirarchy of Objects/Arrays.  
 
