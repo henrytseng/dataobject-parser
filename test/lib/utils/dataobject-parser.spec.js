@@ -11,6 +11,19 @@ describe('DataObjectParser', function(){
   describe('test:unit',function(){
 
     describe('#set',function(){
+      it('should prevent prototype pollution', function($done) {
+        var parser = new DataObjectParser();
+    
+        // Attempt to pollute the prototype
+        (function() {
+          parser.set('__proto__.polluted', true);
+        }).should.throw('Prototype pollution attempt detected');
+
+        // Check that the prototype was not polluted
+        should.not.exist({}.polluted);
+        $done();
+      });
+      
       it('Should accomplish the same as setting internal values with object literals', function($done) {
         var d = new DataObjectParser();
         d.set('$a.b.c', 'Cabin');
