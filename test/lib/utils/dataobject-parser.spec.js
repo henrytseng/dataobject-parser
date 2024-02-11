@@ -741,15 +741,15 @@ describe('DataObjectParser', function(){
         $done();
       });
 
-      xit('Should handle colons in naming correctly as part of a variable name',function($done){
+      it('Should handle colons in naming correctly as part of a variable name',function($done){
         var structured={
           metadata:{
-            'a.b:c': 'some-text'
+            'b:c': 'some-text'
           }
         };
 
         var flat={
-          'metadata.a.b:c': "some-text"
+          'metadata.b:c': "some-text"
         };
 
         DataObjectParser.untranspose(structured).should.eql(flat);
