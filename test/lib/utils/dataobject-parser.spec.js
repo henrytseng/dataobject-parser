@@ -342,18 +342,34 @@ describe('DataObjectParser', function(){
       });
 
       it("Should create a structured data with one key from 'metadata.foo|bar'",function($done){
-          var flat = {
-              'metadata.foo|bar': 'some-text'
-          };
-          var structured={
-              _data:{
-                  metadata: {
-                    'foo|bar': 'some-text'
-                  }
-              }
-          };
-          DataObjectParser.transpose(flat).should.eql(structured);
-          $done();
+        var flat = {
+            'metadata.foo|bar': 'some-text'
+        };
+        var structured={
+            _data:{
+                metadata: {
+                  'foo|bar': 'some-text'
+                }
+            }
+        };
+        DataObjectParser.transpose(flat).should.eql(structured);
+        $done();
+      });
+
+
+      it("Should create a structured data with one key from 'metadata.foo:bar'",function($done){
+        var flat = {
+            'metadata.foo:bar': 'some-text'
+        };
+        var structured={
+            _data:{
+                metadata: {
+                  'foo:bar': 'some-text'
+                }
+            }
+        };
+        DataObjectParser.transpose(flat).should.eql(structured);
+        $done();
       });
 
       it("Should create a structured data with one key from 'metadata.foo_bar'",function($done){
